@@ -2,7 +2,19 @@
 const div = document.getElementById('orderedList')
 
 // starting with brute force nested array
-let headings = ['H1 All About Birds', ['H2 Kinds of Birds', ['H3 The Finch', 'H3 The Swan']], ['H2 Habitats', ['H3 Wetlands']]]
+// let headings = ['H1 All About Birds', ['H2 Kinds of Birds', ['H3 The Finch', 'H3 The Swan']], ['H2 Habitats', ['H3 Wetlands']]]
+
+let headingsNested = ['H1 All About Birds', ['H2 Kinds of Birds', ['H3 The Finch', 'H3 The Swan']], ['H2 Habitats', ['H3 Wetlands']]]
+
+let headingsRaw = ['H1 All About Birds', 'H2 Kinds of Birds', 'H3 The Finch', 'H3 The Swan', 'H2 Habitats', 'H3 Wetlands']
+
+
+
+
+
+
+
+
 
 // transforming array into ordered list
 function toOutline(root, headings) {
