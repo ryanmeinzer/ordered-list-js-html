@@ -1,10 +1,40 @@
 // creating div to hold ordered list
 const div = document.getElementById('orderedList')
 
-// starting with brute force nested array
-let headings = ['H1 All About Birds', ['H2 Kinds of Birds', ['H3 The Finch', 'H3 The Swan']], ['H2 Habitats', ['H3 Wetlands']]]
+let headingsRaw = ['H1 All About Birds', 'H2 Kinds of Birds', 'H3 The Finch', 'H3 The Swan', 'H2 Habitats', 'H3 Wetlands']
 
-// transforming array into ordered list
+// declare variable for nested headings array
+let headings = headingsNester(headingsRaw)
+
+// call function to render DOM into div with headings
+toOutline(div, headings)
+
+// transform raw headings array into nested heading array
+function headingsNester(headingsRaw) {
+    let headingsNested = []
+    for (let i = 0; i < headingsRaw.length; i++) {
+        if (headingsRaw[i].charAt(1) == 1) {
+            headingsNested.push(headingsRaw[i])
+        }
+        if (headingsRaw[i].charAt(1) == 2) {
+            let tempArray = []
+            tempArray.push(headingsRaw[i])
+            headingsNested.push(tempArray)
+        }
+        if (headingsRaw[i].charAt(1) == 3) {
+            if (headingsRaw[i - 1].charAt(1) == 3) {
+                headingsNested[headingsNested.length - 1][headingsNested[headingsNested.length - 1].length - 1].push(headingsRaw[i])
+            } else {
+                let tempArray = []
+                tempArray.push(headingsRaw[i])
+                headingsNested[headingsNested.length - 1].push(tempArray)
+            }
+        }
+    }
+    return headingsNested
+}
+
+// transforming nested headings array into ordered list
 function toOutline(root, headings) {
     // create ordered list
     let ol = document.createElement('ol')
@@ -29,5 +59,3 @@ function toOutline(root, headings) {
         ol.appendChild(li)
     })
 }
-// call function to render DOM into div with headings
-toOutline(div, headings)
